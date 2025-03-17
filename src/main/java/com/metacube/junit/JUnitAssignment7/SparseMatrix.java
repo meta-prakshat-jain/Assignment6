@@ -83,7 +83,7 @@ public class SparseMatrix {
 	/**
 	 * This Method add two sparse matrices together
 	 * @param a1
-	 * @return
+	 * @return SUM Sparse Matrix
 	 */
 	public SparseMatrix Add(SparseMatrix a1) {
 		//Checking if both matrices have same dimensions
@@ -108,7 +108,7 @@ public class SparseMatrix {
 	/**
 	 * This method multiplies two sparse matrices together
 	 * @param m1
-	 * @return
+	 * @return Multiply
 	 */
 	public  SparseMatrix MatrixMultiplication(SparseMatrix m1) {
 		//Check of multiplication is possible by comparing dimensions
@@ -157,44 +157,38 @@ public class SparseMatrix {
 	}
 
 	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		List<pair> entries1 = List.of(
-		        new pair(0,4,9),
-		        new pair(1,1,8),
-		        new pair(2,0,4),
-		        new pair(2,3,2),
-		        new pair(3,5,5),
-		        new pair(4,2,2)
-		    );
-		SparseMatrix matrix1 = new SparseMatrix(5, 6, entries1);
-		System.out.println("Matrix 1");
-		    printMatrix(matrix1.convert());
 
-
-		    List<pair> entries2 = List.of(
-		        new pair(0,4,9),
-		        new pair(1,1,8),
-		        new pair(2,0,4),
-		        new pair(2,3,2),
-		        new pair(3,5,5),
-		        new pair(4,2,2)
-		    );
-		    SparseMatrix matrix2 = new SparseMatrix(5, 6, entries2);
-		    
-		    List<pair> entries3 = List.of(
-			        new pair(0,4,9),
-			        new pair(1,1,8),
-			        new pair(2,0,4),
-			        new pair(2,3,2),
-			        new pair(3,5,5),
-			        new pair(4,2,2),
-			        new pair(4,3,4),
-			        new pair(5,2,4)
-			    );
-		    	System.out.println(" ");
-			    SparseMatrix matrix3 = new SparseMatrix(6, 6, entries3);
-			    printMatrix(matrix3.convert());
-
+		Scanner sc = new Scanner(System.in);  
+		System.out.println("Enter the number of rows and columns for the first matrix:"); 
+		int rows1 = sc.nextInt();
+		int cols1 = sc.nextInt(); 
+		System.out.println("Enter the number of non-zero entries:"); 
+		int numEntries1 = sc.nextInt(); 
+		List<pair> entries1 = new ArrayList<>(); 
+		System.out.println("Enter the non-zero entries in format: row col value"); 
+		for (int i = 0; i < numEntries1; i++) { 
+			int row = sc.nextInt(); 
+			int col = sc.nextInt(); 
+			int value = sc.nextInt(); 
+			entries1.add(new pair(row, col, value)); 
+			} 
+		
+		SparseMatrix matrix1 = new SparseMatrix(rows1, cols1, entries1);
+		System.out.println("Enter the number of rows and columns for the second matrix:"); 
+		int rows2 = sc.nextInt(); 
+		int cols2 = sc.nextInt(); 
+		System.out.println("Enter the number of non-zero entries:"); 
+		int numEntries2 = sc.nextInt(); 
+		List<pair> entries2 = new ArrayList<>(); 
+		System.out.println("Enter the non-zero entries in format: row col value"); 
+		for (int i = 0; i < numEntries2; i++) { 
+			int row = sc.nextInt();  
+			int col = sc.nextInt();
+			int value = sc.nextInt(); 
+			entries2.add(new pair(row, col, value)); 
+			} 
+		SparseMatrix matrix2 = new SparseMatrix(rows2, cols2, entries2);
+		
 		    while(true) {
 		    System.out.println("\nMenu");
 		    System.out.println("Choose 1:To transpose");
@@ -220,7 +214,7 @@ public class SparseMatrix {
 			    printMatrix(sum.convert());
 			    break;
 		    case 4:
-			    SparseMatrix Multiply = matrix1.MatrixMultiplication(matrix3);
+			    SparseMatrix Multiply = matrix1.MatrixMultiplication(matrix2);
 			    System.out.println("Matrices Multiplication:");
 			    printMatrix(Multiply.convert());
 			    break;
@@ -228,8 +222,8 @@ public class SparseMatrix {
 				System.out.println("Please Enter the correct Value");
 		    	break;
 		    }
-		  }
+		    }
 
 	}
-
 }
+
